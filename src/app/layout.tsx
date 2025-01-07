@@ -4,12 +4,18 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import { MouseCursor } from "@/components/mouse-cursor";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Next.js App",
-  description: "Created with Next.js, TypeScript, and Tailwind CSS",
+  title: "WEB3BIT | Custom Web Development and Design Services",
+  description: `Discover WEB3BIT's innovative and customized web solutions. Specializing in web development and design to elevate your online presence.`,
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -21,6 +27,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider>
+          <MouseCursor />
           <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
             <Navbar />
             <Sidebar />
