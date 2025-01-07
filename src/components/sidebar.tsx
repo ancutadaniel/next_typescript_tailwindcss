@@ -25,18 +25,6 @@ export function Sidebar() {
 
   return (
     <>
-      <button
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="fixed left-4 top-4 z-50 rounded-md bg-white p-2 text-gray-600 shadow-sm hover:text-gray-900 lg:hidden dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
-        aria-label="Toggle Menu"
-      >
-        {isSidebarOpen ? (
-          <XMarkIcon className="h-6 w-6" />
-        ) : (
-          <Bars3Icon className="h-6 w-6" />
-        )}
-      </button>
-
       <div
         className={`fixed left-0 top-0 z-40 flex h-full w-64 transform flex-col bg-white shadow-lg transition-transform dark:bg-gray-900 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"

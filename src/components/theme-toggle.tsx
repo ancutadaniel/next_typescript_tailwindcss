@@ -6,7 +6,6 @@ import {
   ComputerDesktopIcon,
 } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
-import { useRef } from "react";
 
 interface ThemeToggleProps {
   compact?: boolean;
