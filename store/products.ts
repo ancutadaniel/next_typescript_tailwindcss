@@ -1,4 +1,4 @@
-import { Product } from "@/types/product";
+import { Product } from "../types/product";
 
 // Sample products data (in a real app, this would come from an API or database)
 export const products: Product[] = [

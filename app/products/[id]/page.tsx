@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProductById } from "@/store/products";
+import { getProductById } from "../../../store/products";
 
 interface PageProps {
   params: { id: string };

@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { toast } from "sonner";
 import { submitContactForm } from "@/actions/contact";
-import { FormInput } from "./components/form-input";
-import { SubmitButton } from "./components/submit-button";
-import { formFields } from "./types";
+import { FormInput } from "@/components/form-input";
+import { SubmitButton } from "@/components/submit-button";
+import { formFields } from "@/types/form-inputs";
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);

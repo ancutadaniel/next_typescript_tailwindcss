@@ -1,6 +1,6 @@
 "use client";
 
-import { useSidebar } from "@/providers/sidebar-context";
+import { useSidebar } from "../providers/sidebar-context";
 
 export function MainContent({ children }: { children: React.ReactNode }) {
   const { isExpanded } = useSidebar();

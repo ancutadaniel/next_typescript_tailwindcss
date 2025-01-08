@@ -1,5 +1,5 @@
-import { ProductCard } from "@/components/product-card";
-import { products } from "@/store/products";
+import { ProductCard } from "../../components/product-card";
+import { products } from "../../store/products";
 
 export default function ProductsPage() {
   return (

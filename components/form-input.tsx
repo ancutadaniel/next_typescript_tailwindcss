@@ -1,4 +1,4 @@
-import { FormInputProps } from "../types";
+import { FormInputProps } from "../types/form-inputs";
 
 export function FormInput({
   label,

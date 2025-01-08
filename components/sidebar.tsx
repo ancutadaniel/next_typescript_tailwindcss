@@ -15,7 +15,7 @@ import { useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import Logo from "./logo";
 import { Navbar } from "./navbar";
-import { useSidebar } from "@/providers/sidebar-context";
+import { useSidebar } from "../providers/sidebar-context";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
