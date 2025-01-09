@@ -1,12 +1,26 @@
-import { ProductCard } from "../../components/product-card";
-import { products } from "../../store/products";
+import { Metadata } from "next";
+import { ProductCard } from "@/components/product-card";
+import { products } from "@/store/products";
+import type { Product } from "@/types/product";
 
-export default function ProductsPage() {
+export const metadata: Metadata = {
+  title: "Products | Web3 Bit",
+  description:
+    "Explore our collection of Web3 products and services. Find the perfect solution for your blockchain and decentralized application needs.",
+  openGraph: {
+    title: "Products | Web3 Bit",
+    description:
+      "Explore our collection of Web3 products and services. Find the perfect solution for your blockchain and decentralized application needs.",
+    type: "website",
+  },
+};
+
+export default function Products() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Our Products</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product) => (
+    <div className="space-y-8">
+      <h1 className="text-3xl font-bold">Our Products</h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((product: Product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

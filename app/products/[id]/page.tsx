@@ -1,17 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProductById } from "../../../store/products";
+import { getProductById } from "@/store/products";
 
 interface PageProps {
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const product = await getProductById(parseInt(params.id));
+
+  if (!product) {
+    notFound();
+  }
+
+  return {
+    title: `${product?.name} | WEB3BIT`,
+    description: product?.details,
+  };
+}
+
 export default async function ProductPage({ params, searchParams }: PageProps) {
   // Ensure params are handled asynchronously
   const { id } = await Promise.resolve(params);
-  const product = getProductById(parseInt(id));
+  const product = await getProductById(parseInt(id));
 
   if (!product) {
     notFound();

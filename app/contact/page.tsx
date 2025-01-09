@@ -1,4 +1,17 @@
+import { Metadata } from "next";
 import { ContactForm } from "./contact-form";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Web3 Bit",
+  description:
+    "Get in touch with us. We'd love to hear from you and answer any questions you may have.",
+  openGraph: {
+    title: "Contact Us | Web3 Bit",
+    description:
+      "Get in touch with us. We'd love to hear from you and answer any questions you may have.",
+    type: "website",
+  },
+};
 
 export default function Contact() {
   return (

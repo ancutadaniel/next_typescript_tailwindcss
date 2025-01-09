@@ -31,6 +31,6 @@ export const products: Product[] = [
   },
 ];
 
-export function getProductById(id: number): Product | undefined {
+export async function getProductById(id: number): Promise<Product | undefined> {
   return products.find((p) => p.id === id);
 }
