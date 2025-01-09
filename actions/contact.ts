@@ -6,7 +6,20 @@ interface ContactFormData {
   message: string;
 }
 
-export async function submitContactForm(formData: FormData) {
+export interface ContactFormState {
+  message?: string;
+  errors?: {
+    name?: string[];
+    email?: string[];
+    message?: string[];
+  };
+  success?: boolean;
+}
+
+export async function handleContactSubmit(
+  prevState: ContactFormState,
+  formData: FormData
+): Promise<ContactFormState> {
   try {
     const data: ContactFormData = {
       name: formData.get("name") as string,
@@ -14,15 +27,32 @@ export async function submitContactForm(formData: FormData) {
       message: formData.get("message") as string,
     };
 
+    const errors: ContactFormState["errors"] = {};
+
     // Validate required fields
-    if (!data.name || !data.email || !data.message) {
-      throw new Error("All fields are required");
+    if (!data.name) {
+      errors.name = ["Name is required"];
+    }
+    if (!data.email) {
+      errors.email = ["Email is required"];
+    }
+    if (!data.message) {
+      errors.message = ["Message is required"];
     }
 
-    // Validate email format
+    // Validate email format if email exists
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-      throw new Error("Invalid email format");
+    if (data.email && !emailRegex.test(data.email)) {
+      errors.email = ["Invalid email format"];
+    }
+
+    // Return early if there are any validation errors
+    if (Object.keys(errors).length > 0) {
+      return {
+        errors,
+        success: false,
+        message: "Please fix the errors above",
+      };
     }
 
     // For now, just log the data
@@ -37,12 +67,17 @@ export async function submitContactForm(formData: FormData) {
     // 3. Integrate with CRM
     // etc.
 
-    return { success: true, message: "Message sent successfully!" };
+    return {
+      success: true,
+      message: "Message sent successfully!",
+      errors: {},
+    };
   } catch (error) {
     console.error("Contact form error:", error);
     return {
       success: false,
       message: error instanceof Error ? error.message : "Something went wrong",
+      errors: {},
     };
   }
 }

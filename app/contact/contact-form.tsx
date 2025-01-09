@@ -1,41 +1,50 @@
 "use client";
 
-import { useRef } from "react";
+import { useActionState } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner";
-import { submitContactForm } from "@/actions/contact";
+import { handleContactSubmit, type ContactFormState } from "@/actions/contact";
 import { FormInput } from "@/components/form-input";
 import { SubmitButton } from "@/components/submit-button";
 import { formFields } from "@/types/form-inputs";
 
+const initialState: ContactFormState = {
+  message: undefined,
+  errors: {},
+  success: false,
+};
+
 export function ContactForm() {
-  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction, isPending] = useActionState(
+    handleContactSubmit,
+    initialState
+  );
 
-  async function handleSubmit(formData: FormData) {
-    try {
-      const response = await submitContactForm(formData);
-
-      if (response.success) {
-        formRef.current?.reset();
-        toast.success(response.message || "Message sent successfully!");
+  useEffect(() => {
+    if (state?.message && Object.keys(state.errors || {}).length === 0) {
+      if (state.success) {
+        toast.success(state.message);
       } else {
-        toast.error(
-          response.message || "Failed to send message. Please try again."
-        );
+        toast.error(state.message);
       }
-    } catch (error) {
-      toast.error("An unexpected error occurred. Please try again later.");
-      console.error("Contact form error:", error);
     }
-  }
+  }, [state]);
 
   return (
-    <form ref={formRef} action={handleSubmit} className="space-y-4">
+    <form action={formAction} className="space-y-4">
       {formFields.map((field) => (
-        <FormInput key={field.name} {...field} />
+        <FormInput
+          key={field.name}
+          {...field}
+          error={state?.errors?.[field.name as keyof typeof state.errors]?.[0]}
+        />
       ))}
       <div>
-        <SubmitButton />
+        <SubmitButton pending={isPending} />
       </div>
+      {isPending && (
+        <p className="text-sm text-gray-500">Processing your request...</p>
+      )}
     </form>
   );
 }

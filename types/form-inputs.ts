@@ -5,6 +5,7 @@ export interface FormInputProps {
   placeholder: string;
   required?: boolean;
   rows?: number;
+  error?: string;
 }
 
 export const formFields: FormInputProps[] = [
@@ -13,12 +14,14 @@ export const formFields: FormInputProps[] = [
     name: "name",
     type: "text",
     placeholder: "Your name",
+    required: true,
   },
   {
     label: "Email",
     name: "email",
     type: "email",
     placeholder: "your.email@example.com",
+    required: true,
   },
   {
     label: "Message",
@@ -26,5 +29,6 @@ export const formFields: FormInputProps[] = [
     type: "textarea",
     placeholder: "Your message",
     rows: 4,
+    required: true,
   },
 ];
