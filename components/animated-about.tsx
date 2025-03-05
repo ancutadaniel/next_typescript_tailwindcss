@@ -165,7 +165,8 @@ export default function AnimatedAbout() {
       {/* Contact CTA */}
       <section className="cta-section text-center">
         <p className="mb-4 text-gray-600 dark:text-gray-300">
-          Interested in working with us? We'd love to hear about your project.
+          Interested in working with us? We&apos;d love to hear about your
+          project.
         </p>
         <Link
           href="/contact"
