@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default async function ProductPage({ params, searchParams }: PageProps) {
+export default async function ProductPage({ params }: PageProps) {
   // Ensure params are handled asynchronously
   const { id } = await Promise.resolve(params);
   const product = await getProductById(parseInt(id));
