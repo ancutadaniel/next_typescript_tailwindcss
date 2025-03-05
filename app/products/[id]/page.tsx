@@ -4,26 +4,26 @@ import { notFound } from "next/navigation";
 import { getProductById } from "@/store/products";
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>; // Update: params is a Promise
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const product = await getProductById(parseInt(params.id));
+  const { id } = await params; // Await the params Promise
+  const product = await getProductById(parseInt(id));
 
   if (!product) {
     notFound();
   }
 
   return {
-    title: `${product?.name} | WEB3BIT`,
-    description: product?.details,
+    title: `${product.name} | WEB3BIT`, // Removed optional chaining since product is guaranteed
+    description: product.details,
   };
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  // Ensure params are handled asynchronously
-  const { id } = await Promise.resolve(params);
+  const { id } = await params; // Await the params Promise directly
   const product = await getProductById(parseInt(id));
 
   if (!product) {
