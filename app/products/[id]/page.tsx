@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { getProductById } from "@/store/products";
 
 interface PageProps {
-  params: Promise<{ id: string }>; // Update: params is a Promise
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; // Update: searchParams is a Promise
 }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   return {
-    title: `${product.name} | WEB3BIT`, // Removed optional chaining since product is guaranteed
+    title: `${product.name} | WEB3BIT`,
     description: product.details,
   };
 }
